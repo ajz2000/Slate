@@ -25,14 +25,9 @@ public class Slate extends JFrame{
 
   //Colours
   //dark
-  private Color bg = new Color(35,35,35);
-  private Color bg2 = new Color(35,200,139);
-  //private Color bg3 = new Color(244,172,183);
-  private Color bg3 = new Color(70,70,70);
-  private Color fg = new Color(240,240,240);
-  //light
-  //private Color bg = new Color(249,249,249);
-  //private Color fg = new Color(145,220,255);
+  private Theme dark = new Theme(new Color(35,35,35),new Color(35,200,139),new Color(70,70,70),new Color(240,240,240));
+  private Theme light = new Theme(new Color(249,249,249),new Color(145,220,255),new Color(200,200,200),new Color(35,35,35));
+  private Theme currentTheme = dark;
   
   private Font mainFont;
   
@@ -58,7 +53,7 @@ public class Slate extends JFrame{
     //add(editScrollPane,BorderLayout.EAST);
     add(editScrollPane, BorderLayout.CENTER);
     menuPanel.setLayout(menuLayout);
-    menuPanel.setBackground(bg);
+    menuPanel.setBackground(currentTheme.getBG());
     //menuPanel.setPreferredSize(new Dimension(150,300));
     menuScrollPane = new JScrollPane(menuPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     menuPanel.add(Box.createRigidArea(new Dimension(0,22)));
@@ -96,10 +91,10 @@ public class Slate extends JFrame{
     jb.setMinimumSize(new Dimension(200,44));
     jb.setPreferredSize(new Dimension(200,44));
     jb.setCard(editSpaces);
-    jb.setBackground(bg);
+    jb.setBackground(currentTheme.getBG());
     jb.setFont(mainFont.deriveFont(20f));
     jb.setHorizontalAlignment(SwingConstants.LEFT);
-    jb.setForeground(bg3);
+    jb.setForeground(currentTheme.getBG3());
     if(editSpaces>1)
       jb.setText("untitled");
     jb.setFocusPainted(false);
@@ -112,9 +107,9 @@ public class Slate extends JFrame{
         cardLayout.show(editPanel,Integer.toString(jb.getCard()));
         currentCard = jb.getCard();
         for (int i = 0; i< buttonList.size(); i++){
-          buttonList.get(i).setForeground(bg3);
+          buttonList.get(i).setForeground(currentTheme.getBG3());
         }
-        jb.setForeground(bg2);
+        jb.setForeground(currentTheme.getBG2());
       }
     });
     
@@ -154,18 +149,31 @@ public class Slate extends JFrame{
     return menuPanel;
   }
   public Color getFG(){
-    return fg;
+    return currentTheme.getFG();
   }
   public Color getBG(){
-    return bg;
+    return currentTheme.getBG();
   }
   public Color getBG2(){
-    return bg2;
+    return currentTheme.getBG2();
   }
   public Color getBG3(){
-    return bg3;
+    return currentTheme.getBG3();
   }
   public Font getMainFont(){
     return mainFont;
+  }
+  public void swapTheme(){
+    if (currentTheme == dark){
+      currentTheme = light;
+    }
+    else{
+      currentTheme = dark;
+    }
+    menuPanel.setBackground(currentTheme.getBG());
+    for (int i = 0; i < buttonList.size(); i++){
+    buttonList.get(i).setBackground(currentTheme.getBG());
+    buttonList.get(i).setForeground(currentTheme.getBG3());
+    }
   }
 }

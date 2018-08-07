@@ -2,12 +2,12 @@ Slate Todo
 ----------
 
 Short Term:
--instead of Jbuttons for the open files, use jpanels with jbuttons added 	to them in order to facilitate the drop down headers for sections
+-instead of Jbuttons for the open files, use jpanels with jbuttons added to them in order to facilitate the drop down headers for sections
 -expand abbreviations
 
 -open files as new file (unless on blank file)
 
--ctrl + T to change theme
+
 
 
 -make closing return to previous tab, not tab1 [done]
@@ -23,6 +23,7 @@ Short Term:
 -save / save as [done]
 -ctrl z [done]
 -ctrl q to quit [done]
+-ctrl + T to change theme [done]
 	
 -add some cool tech looking shit like
 

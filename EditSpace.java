@@ -44,8 +44,8 @@ public class EditSpace extends JTextArea{
         grabFocus();
       }
       
-      public void componentHidden ( ComponentEvent e ){
-        menuButton.setForeground(slate.getBG3());
+      public void componentHidden ( ComponentEvent e ){    
+  menuButton.setForeground(slate.getBG3());
       }
     } );
     
@@ -54,6 +54,8 @@ public class EditSpace extends JTextArea{
       @Override
       public void focusGained(FocusEvent e){
         menuButton.setForeground(slate.getBG2());
+        setBackground(slate.getBG());
+        setForeground(slate.getFG());
       }
       
       @Override
@@ -124,6 +126,12 @@ public class EditSpace extends JTextArea{
         }
         else if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q){
         System.exit(0);
+        }
+        else if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_T){
+        slate.swapTheme();
+        setBackground(slate.getBG());
+        menuButton.setForeground(slate.getBG2());
+        setForeground(slate.getFG());
         }
       }
     });
