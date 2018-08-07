@@ -4,13 +4,14 @@ Slate Todo
 Short Term:
 -instead of Jbuttons for the open files, use jpanels with jbuttons added to them in order to facilitate the drop down headers for sections
 -expand abbreviations
--make closing return to previous tab, not tab1
+
 -open files as new file (unless on blank file)
 -ctrl z
 -ctrl + T to change theme
 -ctrl q to quit
--windows default look and feel in file chooser ONLY
 
+
+-make closing return to previous tab, not tab1 [done]
 -Add menuPanel to JScrollPane [done]
 -Drag and drop[done]
 -wrap text[done]
@@ -47,4 +48,5 @@ Known Bugs:
 
 
 Scrapped Ideas:
--replace edges of apllication with small jpanels instead of JTextArea margins so that text avoids edges while scrolling [I've come to enjoy the look]
+-replace edges of apllication with small jpanels instead of JTextArea margins so that text avoids edges while scrolling [I've come to enjoy the look] 
+-windows default look and feel in file chooser ONLY [This looks pretty bad, maybe find a better look and feel or create my own]

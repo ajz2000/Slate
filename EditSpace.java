@@ -21,8 +21,8 @@ public class EditSpace extends JTextArea{
   public EditSpace(Slate slate, int col, int row){
     
     super(row,col);
-
-      setDropTarget(new DropTarget() {
+    
+    setDropTarget(new DropTarget() {
       public synchronized void drop(DropTargetDropEvent evt) {
         try {
           evt.acceptDrop(DnDConstants.ACTION_COPY);
@@ -107,7 +107,7 @@ public class EditSpace extends JTextArea{
             slate.setSize(1248,748);
           }
           slate.toggleFullscreen();
-        slate.setLocationRelativeTo(null);
+          slate.setLocationRelativeTo(null);
         }
       }
     });
@@ -146,7 +146,7 @@ public class EditSpace extends JTextArea{
       changed = false;
       File f = new File(currentFile);
       if(currentFile.contains(".")){
-      menuButton.setText(f.getName().substring(0, f.getName().indexOf('.')));
+        menuButton.setText(f.getName().substring(0, f.getName().indexOf('.')));
       }else{
         menuButton.setText(f.getName());
       }
@@ -158,9 +158,17 @@ public class EditSpace extends JTextArea{
   
   private void close(){
     slate.getEditPanelLayout().removeLayoutComponent(this);
+    int positionInList = (int)slate.getActiveNumbers().indexOf(menuButton.getCard());
+    int toDisplay;
+    
+    if(positionInList == 0){
+      toDisplay = (int)slate.getActiveNumbers().get(1);
+    } else
+    {
+      toDisplay = (int)slate.getActiveNumbers().get(positionInList -1);
+    }
+    slate.getEditPanelLayout().show(slate.getEditPanel(),Integer.toString(toDisplay));
     slate.getActiveNumbers().remove(slate.getActiveNumbers().indexOf(menuButton.getCard()));
-    int firstElement = (int)slate.getActiveNumbers().get(0);
-    slate.getEditPanelLayout().show(slate.getEditPanel(),Integer.toString(firstElement));
     menuButton.removeFrom(slate.getMenuPanel());
     slate.decreaseNumberOfEditSpaces();  
   }
@@ -170,7 +178,7 @@ public class EditSpace extends JTextArea{
       saveFile(dialog.getSelectedFile().getAbsolutePath());
       File f = new File(currentFile);
       if(currentFile.contains(".")){
-      menuButton.setText(f.getName().substring(0, f.getName().indexOf('.')));
+        menuButton.setText(f.getName().substring(0, f.getName().indexOf('.')));
       }else{
         menuButton.setText(f.getName());
       }

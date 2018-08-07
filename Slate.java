@@ -83,7 +83,6 @@ public class Slate extends JFrame{
     setLocationRelativeTo(null);
     setTitle("Slate");
     setVisible(true);  
-    System.out.println("Width:" + getWidth() + "Height: "+ getHeight());
     
   }
   
