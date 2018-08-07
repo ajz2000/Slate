@@ -1,0 +1,50 @@
+Slate Todo
+----------
+
+Short Term:
+-instead of Jbuttons for the open files, use jpanels with jbuttons added to them in order to facilitate the drop down headers for sections
+-expand abbreviations
+-make closing return to previous tab, not tab1
+-open files as new file (unless on blank file)
+-ctrl z
+-ctrl + T to change theme
+-ctrl q to quit
+-windows default look and feel in file chooser ONLY
+
+-Add menuPanel to JScrollPane [done]
+-Drag and drop[done]
+-wrap text[done]
+-close files[done]
+-clean up code [done]
+-colour name of open file [done]
+-deal with the naming of files [done]
+-check currentFile Stuff[done]
+-jtextarea maintain focus when switched to via closing another jtextarea [done]
+-save / save as [done]
+
+-add some cool tech looking shit like
+
+02 00 13 03 44 55
+54 53 10 35 22 27
+00 00 00 00 00 00
+00 00 00 00 00 00
+00 00 00 00 00 00
+00 00 00 00 00 00
+
+Long Term:
+-Tabs[done]
+-Maybe rich text
+-headers
+-comment code
+-section header dropdown menu from button
+
+Known Bugs:
+-After alt-tabbing, ctrl n throws an error, but the app continue to function, also occurs after drag + drop (sometimes occurs with ctrl w I think)
+
+-After scrolling down and switching to a doc that doesn't need to scroll, you are still able to scroll down
+
+-String out of bounds exception when clicking "cancel" during save as [fixed]
+
+
+Scrapped Ideas:
+-replace edges of apllication with small jpanels instead of JTextArea margins so that text avoids edges while scrolling [I've come to enjoy the look]

@@ -16,12 +16,13 @@ public class Slate extends JFrame{
   private LayoutManager menuLayout = new BoxLayout(menuPanel, BoxLayout.Y_AXIS);
   private ArrayList<Integer> activeNumbers = new ArrayList<Integer>();
   private ArrayList<JButton> buttonList = new ArrayList<JButton>();
+  private boolean fullscreen = false;
   //this is the number used when creating a card
   private int editSpaces = 0;
   //this is the total number of editspaces;
   private int numberOfEditSpaces = 0;
   private int currentCard = 1;
-  
+
   //Colours
   //dark
   private Color bg = new Color(35,35,35);
@@ -82,7 +83,8 @@ public class Slate extends JFrame{
     setLocationRelativeTo(null);
     setTitle("Slate");
     setVisible(true);  
-  
+    System.out.println("Width:" + getWidth() + "Height: "+ getHeight());
+    
   }
   
   
@@ -130,6 +132,12 @@ public class Slate extends JFrame{
   
   public int getNumberOfEditSpaces(){
     return numberOfEditSpaces;
+  }
+  public void toggleFullscreen(){
+    fullscreen = !fullscreen;
+  }
+  public boolean getFullscreen(){
+    return fullscreen;
   }
   public ArrayList getActiveNumbers(){
     return activeNumbers;

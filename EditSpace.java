@@ -104,6 +104,15 @@ public class EditSpace extends JTextArea{
           slate.setMinimumSize(new Dimension(1920,1080));
           slate.setLocationRelativeTo(null);
       }
+        else if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_F){
+          if(!slate.getFullscreen()){
+            slate.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+          } else{
+            slate.setSize(1248,748);
+          }
+          slate.toggleFullscreen();
+        slate.setLocationRelativeTo(null);
+        }
       }
     });
     
