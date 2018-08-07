@@ -9,6 +9,7 @@ import java.awt.event.FocusListener;
 import java.awt.dnd.*;
 import java.util.List;
 import java.awt.datatransfer.DataFlavor;
+import javax.swing.undo.*;
 
 public class EditSpace extends JTextArea{
   
@@ -17,6 +18,7 @@ public class EditSpace extends JTextArea{
   private Slate slate;
   private JFileChooser dialog = new JFileChooser(System.getProperty("User.dir"));
   private MenuButton menuButton;
+  private UndoManager manager;
   
   public EditSpace(Slate slate, int col, int row){
     
@@ -109,6 +111,17 @@ public class EditSpace extends JTextArea{
           slate.toggleFullscreen();
           slate.setLocationRelativeTo(null);
         }
+        else if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Z){
+          if(e.isShiftDown()){
+            if(manager.canRedo()){
+              manager.redo();
+            }
+          } else{
+            if(manager.canUndo()){
+              manager.undo();
+            }
+          }
+        }
       }
     });
     
@@ -123,6 +136,9 @@ public class EditSpace extends JTextArea{
     setFont(slate.getMainFont());
     setTabSize(4);
     grabFocus();
+    
+    manager = new UndoManager();
+    getDocument().addUndoableEditListener(manager);
   }
   
   private void saveFile(String fileName){
