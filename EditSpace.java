@@ -122,6 +122,9 @@ public class EditSpace extends JTextArea{
             }
           }
         }
+        else if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q){
+        System.exit(0);
+        }
       }
     });
     
@@ -166,6 +169,7 @@ public class EditSpace extends JTextArea{
       }else{
         menuButton.setText(f.getName());
       }
+      getDocument().addUndoableEditListener(manager);
     }
     catch(IOException e){
       JOptionPane.showMessageDialog(this,"Editor can't find the file called "+fileName);

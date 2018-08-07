@@ -2,13 +2,12 @@ Slate Todo
 ----------
 
 Short Term:
--instead of Jbuttons for the open files, use jpanels with jbuttons added to them in order to facilitate the drop down headers for sections
+-instead of Jbuttons for the open files, use jpanels with jbuttons added 	to them in order to facilitate the drop down headers for sections
 -expand abbreviations
 
 -open files as new file (unless on blank file)
--ctrl z
+
 -ctrl + T to change theme
--ctrl q to quit
 
 
 -make closing return to previous tab, not tab1 [done]
@@ -22,7 +21,9 @@ Short Term:
 -check currentFile Stuff[done]
 -jtextarea maintain focus when switched to via closing another jtextarea [done]
 -save / save as [done]
-
+-ctrl z [done]
+-ctrl q to quit [done]
+	
 -add some cool tech looking shit like
 
 02 00 13 03 44 55
@@ -34,7 +35,7 @@ Short Term:
 
 Long Term:
 -Tabs[done]
--Maybe rich text
+
 -headers
 -comment code
 -section header dropdown menu from button
@@ -46,7 +47,10 @@ Known Bugs:
 
 -String out of bounds exception when clicking "cancel" during save as [fixed]
 
+-Cannot undo in an editspace where a file has been opened [fixed]
+
 
 Scrapped Ideas:
 -replace edges of apllication with small jpanels instead of JTextArea margins so that text avoids edges while scrolling [I've come to enjoy the look] 
 -windows default look and feel in file chooser ONLY [This looks pretty bad, maybe find a better look and feel or create my own]
+-Maybe rich text[I have no interest in rich text]
