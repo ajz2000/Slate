@@ -2,6 +2,9 @@ Slate Todo
 ----------
 
 Short Term:
+-Proper formatting of menu buttons
+-Right utility bar
+-min mode (ctrl m)
 -instead of Jbuttons for the open files, use jpanels with jbuttons added to them in order to facilitate the drop down headers for sections
 -expand abbreviations
 

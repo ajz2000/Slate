@@ -56,6 +56,7 @@ public class EditSpace extends JTextArea{
         menuButton.setForeground(slate.getBG2());
         setBackground(slate.getBG());
         setForeground(slate.getFG());
+        setCaretColor(slate.getFG());
       }
       
       @Override
@@ -132,13 +133,14 @@ public class EditSpace extends JTextArea{
         setBackground(slate.getBG());
         menuButton.setForeground(slate.getBG2());
         setForeground(slate.getFG());
+        setCaretColor(slate.getFG());
         }
       }
     });
     
     
     this.slate = slate;
-    setMargin(new Insets(44, 44, 44, 44));
+    setMargin(new Insets(slate.getFontSize()*2, slate.getFontSize()*2, slate.getFontSize()*2, slate.getFontSize()*2));
     setWrapStyleWord(true);
     setLineWrap(true);
     setBackground(slate.getBG());

@@ -24,28 +24,49 @@ public class Slate extends JFrame{
   private int currentCard = 1;
 
   //Colours
-  //dark
-  private Theme dark = new Theme(new Color(35,35,35),new Color(35,200,139),new Color(70,70,70),new Color(240,240,240));
-  private Theme light = new Theme(new Color(249,249,249),new Color(145,220,255),new Color(200,200,200),new Color(35,35,35));
-  private Theme currentTheme = dark;
+  //bg, bg2, bg3, fg
+//  private Theme dark = new Theme(new Color(35,35,35),new Color(35,200,139),new Color(70,70,70),new Color(240,240,240));
+//  private Theme light = new Theme(new Color(249,249,249),new Color(145,220,255),new Color(200,200,200),new Color(35,35,35));
+//  private Theme flow = new Theme(new Color(101,97,118),new Color(1,111,185),new Color(248,241,255),new Color(222,205,245));
+ // private Theme currentTheme = dark;
+  private Theme currentTheme;
+  private ArrayList<Theme> themes = new ArrayList<Theme>();
   
   private Font mainFont;
+
+  private DragBar dragBar;
+  private int fontSize = 20;
   
   public static void main(String[] args){
     new Slate();
   }
   
   public Slate(){
-    
+    //dark
+    themes.add(new Theme(new Color(35,35,35),new Color(35,200,139),new Color(70,70,70),new Color(240,240,240)));
+    //light
+    themes.add(new Theme(new Color(249,249,249),new Color(145,220,255),new Color(200,200,200),new Color(35,35,35)));
+    //abs
+    themes.add(new Theme(new Color(0,0,0),new Color(255,0,0),new Color(70,70,70),new Color(255,255,255)));
+    //terminal
+    themes.add(new Theme(new Color(40,40,40),new Color(12,160,12),new Color(12,70,12),new Color(12,100,12)));
+
+    //green WIP
+    themes.add(new Theme(new Color(183,240,173),new Color(237,255,122),new Color(70,70,70),new Color(70,70,70)));
+    currentTheme = themes.get(0);
     try{
-      Font newFont = Font.createFont(Font.TRUETYPE_FONT, new File("Anonymous Pro B.ttf")).deriveFont(Font.PLAIN, 22);
+      Font newFont = Font.createFont(Font.TRUETYPE_FONT, new File("Anonymous Pro B.ttf")).deriveFont(Font.PLAIN, fontSize);
       mainFont = newFont;
     }catch(Exception e){
       System.out.println("SHIT BROKE");
     }
     
     
-    
+    dragBar = new DragBar();
+    dragBar.setComponent(this);
+    dragBar.setBackground(currentTheme.getBG());
+    dragBar.setPreferredSize(new Dimension(1248,44));
+    add(dragBar, BorderLayout.NORTH);
     
     editPanel.setBackground(Color.BLACK);
     editScrollPane = new JScrollPane(editPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -56,8 +77,8 @@ public class Slate extends JFrame{
     menuPanel.setBackground(currentTheme.getBG());
     //menuPanel.setPreferredSize(new Dimension(150,300));
     menuScrollPane = new JScrollPane(menuPanel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    menuPanel.add(Box.createRigidArea(new Dimension(0,22)));
-    menuScrollPane.setPreferredSize(new Dimension(200,300));
+    menuPanel.add(Box.createRigidArea(new Dimension(0,fontSize)));
+    menuScrollPane.setPreferredSize(new Dimension(fontSize*9,300));
     menuScrollPane.getVerticalScrollBar().setUnitIncrement(16);
     add(menuScrollPane,BorderLayout.WEST);
     addEditSpace("       ");  
@@ -87,12 +108,13 @@ public class Slate extends JFrame{
     numberOfEditSpaces++;
     activeNumbers.add(editSpaces);
     MenuButton jb = new MenuButton(name);
-    jb.setMaximumSize(new Dimension(200,44));
-    jb.setMinimumSize(new Dimension(200,44));
-    jb.setPreferredSize(new Dimension(200,44));
+    jb.setMaximumSize(new Dimension(200,fontSize*2));
+    jb.setMinimumSize(new Dimension(200,fontSize*2));
+    jb.setPreferredSize(new Dimension(200,fontSize*2));
     jb.setCard(editSpaces);
     jb.setBackground(currentTheme.getBG());
-    jb.setFont(mainFont.deriveFont(20f));
+    //You should change this to make it more in line with the editor font
+    jb.setFont(mainFont.deriveFont(fontSize));
     jb.setHorizontalAlignment(SwingConstants.LEFT);
     jb.setForeground(currentTheme.getBG3());
     if(editSpaces>1)
@@ -129,6 +151,7 @@ public class Slate extends JFrame{
   }
   public void toggleFullscreen(){
     fullscreen = !fullscreen;
+    dragBar.toggleDraggable();
   }
   public boolean getFullscreen(){
     return fullscreen;
@@ -164,16 +187,19 @@ public class Slate extends JFrame{
     return mainFont;
   }
   public void swapTheme(){
-    if (currentTheme == dark){
-      currentTheme = light;
-    }
-    else{
-      currentTheme = dark;
+    if(themes.indexOf(currentTheme)== themes.size()-1){
+      currentTheme = themes.get(0);
+    } else{
+    currentTheme = themes.get(themes.indexOf(currentTheme)+1);
     }
     menuPanel.setBackground(currentTheme.getBG());
+    dragBar.setBackground(currentTheme.getBG());
     for (int i = 0; i < buttonList.size(); i++){
     buttonList.get(i).setBackground(currentTheme.getBG());
     buttonList.get(i).setForeground(currentTheme.getBG3());
     }
+  }
+  public int getFontSize(){
+    return fontSize;
   }
 }
