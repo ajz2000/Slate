@@ -2,6 +2,7 @@ Slate Todo
 ----------
 
 Short Term:
+-Invisible drag bar
 -Proper formatting of menu buttons
 -Right utility bar
 -min mode (ctrl m)
@@ -45,6 +46,8 @@ Long Term:
 -section header dropdown menu from button
 
 Known Bugs:
+-documentListener does not update last word after backspace
+
 -After alt-tabbing, ctrl n throws an error, but the app continue to function, also occurs after drag + drop (sometimes occurs with ctrl w I think)
 
 -After scrolling down and switching to a doc that doesn't need to scroll, you are still able to scroll down

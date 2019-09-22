@@ -50,15 +50,18 @@ public class Slate extends JFrame{
     themes.add(new Theme(new Color(0,0,0),new Color(255,0,0),new Color(70,70,70),new Color(255,255,255)));
     //terminal
     themes.add(new Theme(new Color(40,40,40),new Color(12,160,12),new Color(12,70,12),new Color(12,100,12)));
-
-    //green WIP
-    themes.add(new Theme(new Color(183,240,173),new Color(237,255,122),new Color(70,70,70),new Color(70,70,70)));
+    //beige
+    themes.add(new Theme(new Color(219,202,182),new Color(221,115,115),new Color(220,220,220),new Color(255,255,255)));
+    //light 2
+    themes.add(new Theme(new Color(249,249,249),new Color(105,162,176),new Color(200,200,200),new Color(221,115,115)));
+    //light 2.5
+    themes.add(new Theme(new Color(249,249,249),new Color(101,145,87),new Color(200,200,200),new Color(221,115,115)));  
     currentTheme = themes.get(0);
     try{
       Font newFont = Font.createFont(Font.TRUETYPE_FONT, new File("Anonymous Pro B.ttf")).deriveFont(Font.PLAIN, fontSize);
       mainFont = newFont;
     }catch(Exception e){
-      System.out.println("SHIT BROKE");
+      System.out.println("Font Loading Error");
     }
     
     
@@ -142,7 +145,11 @@ public class Slate extends JFrame{
     es.setMenuButton(jb);
     menuPanel.revalidate();
     CardLayout cardLayout = (CardLayout)editPanel.getLayout();
+    //The error is happening here
     cardLayout.show(editPanel,Integer.toString(editSpaces));
+    //this gives me the same error
+    //jb.doClick();
+    //the error still occurs when a try catch is put in
     es.grabFocus();
   }
   

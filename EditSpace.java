@@ -10,6 +10,8 @@ import java.awt.dnd.*;
 import java.util.List;
 import java.awt.datatransfer.DataFlavor;
 import javax.swing.undo.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class EditSpace extends JTextArea{
   
@@ -19,11 +21,54 @@ public class EditSpace extends JTextArea{
   private JFileChooser dialog = new JFileChooser(System.getProperty("User.dir"));
   private MenuButton menuButton;
   private UndoManager manager;
-  
+  private String lastWord;
+  private EditSpace thisEditSpace;
+    
   public EditSpace(Slate slate, int col, int row){
     
     super(row,col);
+    thisEditSpace = this;
     
+    getDocument().addDocumentListener(new DocumentListener() {
+
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                  getLastWord();
+                  System.out.println(lastWord);
+                  userActionCheck();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                  getLastWord();
+                  System.out.println(lastWord);
+                  userActionCheck();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                  getLastWord();
+                  System.out.println(lastWord);
+                  userActionCheck();
+                }
+                
+                public void getLastWord(){
+                  //this looks incredibly goody but it actually works
+                  //find a better solution when you have time
+                  try{
+                    int startOfWord = Utilities.getWordStart(thisEditSpace,thisEditSpace.getCaretPosition());
+                    int endOfWord = Utilities.getWordEnd(thisEditSpace,thisEditSpace.getCaretPosition());
+                    lastWord = thisEditSpace.getDocument().getText(startOfWord, endOfWord - startOfWord);
+                  } catch (Exception e){
+                    try{
+                    int startOfWord = Utilities.getWordStart(thisEditSpace,thisEditSpace.getCaretPosition() - 1);
+                    int endOfWord = Utilities.getWordEnd(thisEditSpace,thisEditSpace.getCaretPosition() - 1);
+                    lastWord = thisEditSpace.getDocument().getText(startOfWord, endOfWord - startOfWord);
+                    }catch(Exception f){}
+                  }
+                }
+    });
+        
     setDropTarget(new DropTarget() {
       public synchronized void drop(DropTargetDropEvent evt) {
         try {
@@ -110,6 +155,7 @@ public class EditSpace extends JTextArea{
             slate.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
           } else{
             slate.setSize(1248,748);
+            revalidate();
           }
           slate.toggleFullscreen();
           slate.setLocationRelativeTo(null);
@@ -220,5 +266,21 @@ public class EditSpace extends JTextArea{
     this.menuButton = menuButton;
     menuButton.setForeground(slate.getBG2());
   }
-  
+  public void userActionCheck(){
+    if(lastWord.equals("cmdexit")){
+      if(slate.getNumberOfEditSpaces() == 1){
+            System.exit(0);
+          }
+          else{
+            close();
+          }
+    }
+    else if(lastWord.equals("cmdtheme")){
+      slate.swapTheme();
+        setBackground(slate.getBG());
+        menuButton.setForeground(slate.getBG2());
+        setForeground(slate.getFG());
+        setCaretColor(slate.getFG());
+    }
+  }
 }
