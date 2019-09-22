@@ -1,7 +1,7 @@
 # Slate
 Slate is a minimalist text editor that lets you focus on the task at hand
 
-![Slate Screenshot](Screenshot.PNGU)
+![Slate Screenshot](Screenshot.PNG)
 
 ## Features
 - Minimal clutter for minimal distraction
